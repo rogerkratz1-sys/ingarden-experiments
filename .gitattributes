@@ -1,0 +1,2 @@
+supplement/S-8/stability_map.csv filter=lfs diff=lfs merge=lfs -text
+supplement/S-8/diagnostics/stability_map.csv filter=lfs diff=lfs merge=lfs -text
