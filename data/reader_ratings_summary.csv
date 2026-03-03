@@ -1,6 +1,6 @@
 ﻿# provenance: git_commit=e7903bb
 # generated_for: Appendix G preregistered human evaluation
-# command: <replace-with-exact-generation-command>
+# command: python scripts/generate_reader_summaries.py --input data/raw_reader_responses.csv --output supplement/reader_ratings_summary.csv
 # timestamp: 2026-03-03T03:33:27.5286775Z
 
 exemplar_id,mean_rating,sd_rating,n_readers,anchor_preservation_rate,motif_label,permutation,cover_violations,kendall_tau,anchor_preservation,stability_fraction,structural_metric,notes,display_label
