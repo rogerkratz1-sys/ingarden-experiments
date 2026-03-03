@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "canonical_path": "supplement_s7/eventizations/canonical.txt",
+    "parse_path": "supplement_s7/eventizations/srlsim.txt",
+    "mapping_path": "supplement_s7/mappings/srlsim_mapping.csv",
+    "aggregation_rule": "first_parse_unit_or_index"
+  },
+  "labels": {
+    "canonical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "parse": [
+      "Ten maidens took their lamps.",
+      "Five of them were foolish.",
+      "The foolish took their lamps but took no oil with them.",
+      "The wise took flasks of oil with their lamps.",
+      "As the bridegroom was delayed, they all slumbered and slept.",
+      "At midnight there was a cry: “Behold, the bridegroom! Come out to meet him.”",
+      "﻿# Agents and their actions",
+      "The foolish said to the wise, “Give us some of your oil, for our lamps are going out.”",
+      "The wise replied, “Perhaps there will not be enough for us and for you; go rather to the dealers and buy for yourselves.”",
+      "And while they went to buy, the bridegroom came.",
+      "Afterward the other maidens came also, saying, “Lord, lord, open to us.”",
+      "But he replied, \"Truly, I say to you, I do not know you.”"
+    ]
+  }
+}

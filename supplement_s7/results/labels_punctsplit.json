@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "canonical_path": "supplement_s7/eventizations/canonical.txt",
+    "parse_path": "supplement_s7/eventizations/punctsplit.txt",
+    "mapping_path": "supplement_s7/mappings/punctsplit_mapping.csv",
+    "aggregation_rule": "first_parse_unit_or_index"
+  },
+  "labels": {
+    "canonical": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "parse": [
+      -1,
+      "Five of them were foolish,",
+      "and five were wise.",
+      "For when the foolish took their lamps,",
+      "they took no oil with them;",
+      "but the wise took flasks of oil with their lamps.",
+      "As the bridegroom was delayed,",
+      "they all slumbered and slept.",
+      "But at midnight there was a cry,",
+      "“Behold the bridegroom!",
+      "Come out to meet him.”",
+      "Then all those maidens rose and trimmed their lamps."
+    ]
+  }
+}
