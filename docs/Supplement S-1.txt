@@ -1,0 +1,2 @@
+﻿This file has been superseded. Canonical S-1 is at /supplement/S-1_revised_20260210.txt (git_commit: 7350a47).
+For machine-readable artifacts and provenance see supplement/README_Supplements.md.
