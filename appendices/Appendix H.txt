@@ -1,0 +1,62 @@
+Appendix H — Eventization sensitivity: diagnostics, interpretation, and reproducible artifacts
+
+Overview
+This appendix documents the protocol and diagnostics used to evaluate whether motif assignments discovered on the canonical Ten Virgins eventization remain meaningful under alternative eventizations. Rather than reporting agreement numbers that are mathematically forced by onetoone index alignments, we present the mapping provenance and mapping quality diagnostics that determine whether high agreement is substantive. All raw artifacts, mapping CSVs, remapped JSONs, and full numeric tables (including bootstrap outputs) are archived in Supplement S7 (paths listed below).
+
+Evaluation protocol (concise)
+* Discovery: motif exemplars and thresholds were defined on the canonical eventization only.
+* Evaluation: for each alternative parse we (1) map parse units to canonical indices using the documented CSV mapping, (2) run the identical motifassignment pipeline without retuning thresholds, and (3) compute diagnostics (mapping quality, mapped coverage, threshold sweep, and motif preservation).
+* Reporting principle: when remapped arrays are identical to canonical indices (mappingdriven), ARI/? are omitted from the main appendix table and replaced by mapping diagnostics; when mappings are substantive (high token overlap and broad coverage), ARI/? with bootstrap CIs are reported.
+
+Table H.1 — Agreement with canonical motifs (point estimates and reporting mode)
+ParseARI (point)Cohen’s ? (point)Reporting modeParseA0.1930.29Direct point estimates (nondegenerate; cited in main text)ParseB0.1860.27Direct point estimates (nondegenerate; cited in main text)TokenGranularitymappingdiagnosticsmappingdiagnosticsMapping diagnostics and robustness checks (ARI/? omitted here)PunctSplitmappingdiagnosticsmappingdiagnosticsMapping diagnostics and robustness checks (ARI/? omitted here)DiscourseBoundarymappingdiagnosticsmappingdiagnosticsMapping diagnostics and robustness checks (ARI/? omitted here)SRLsimmappingdiagnostics (partial)mappingdiagnostics (partial)Mapping diagnostics; ARI/? reported only on mapped subset in supplementNote: For TokenGranularity, PunctSplit, DiscourseBoundary, and SRLsim the canonical?parse mappings produced onetoone assignments for the mapped units in the runs reported here; remapped label arrays therefore equal the canonical index array and ARI/? computed on those remapped arrays are 1.000 by construction. Rather than present those degenerate values in the main table, we provide the mapping diagnostics below and the full remapped artifacts in Supplement S7 so readers can judge substantive alignment.
+
+Mapping quality diagnostics (primary evidence for substantive agreement)
+BestJaccard (token overlap) summaries
+ParseUnitsMedian JaccardMeanMinMaxIQRtokengran141.0000.87550.2501.0000.1429punctsplit240.5000.53870.18181.0000.3333discourseboundary100.83970.80050.45830.91300.1222srlsim230.69230.52800.0001.0000.9444Interpretation: tokengran and discourseboundary show high median token overlap (many nearexact text matches), supporting substantive alignment under tokenoverlap mapping. punctsplit is moderate; srlsim is heterogeneous (some zeroscore units), so mapping coverage and selective exclusion materially affect interpretation.
+Threshold sweep (coverage summary only)
+* Thresholds tested: 0.05, 0.15, 0.25 (tokenJaccard).
+* Representative coverage results: 
+o tokengran: 14/14 mapped at all thresholds (frac_mapped = 1.00).
+o punctsplit: 24/24 mapped at 0.05/0.15; 22/24 at 0.25 (frac_mapped = 0.917 at 0.25).
+o discourseboundary: 10/10 mapped at all thresholds (frac_mapped = 1.00).
+o srlsim: 17/23 (0.05), 16/23 (0.15), 15/23 (0.25) — partial coverage.
+Why coverage matters: metrics computed only on the mapped subset can overstate agreement if unmapped units are the ones that would disagree; report mapped counts alongside any ARI/?.
+
+Representative mapping samples (first 10 rows from each mapping CSV)
+* tokengran (sample):
+Ten maidens took their lamps and went to meet the bridegroom. ? 0
+Five of them were foolish, and five were wise. ? 1
+For when the foolish took their lamps, they took no oil with them; ? 2
+but the wise took flasks of oil with their lamps. ? 3
+As the bridegroom was delayed, they all slumbered and slept. ? 4
+But at midnight there was a cry: “Behold the bridegroom! Come out to meet him.” ? 5
+Then all those maidens rose and trimmed their lamps. ? 6
+And the foolish said to the wise, “Give us some of your oil, for our lamps are going out.” ? 7
+But the wise replied, “Perhaps there will not be enough for us and for you; ? 8
+go rather to the dealers and buy for yourselves.” ? 8
+* punctsplit (sample): first lines map to canonical indices 0, 1, 1, 2, 2, 3, 4, 4, 5, 5 (see Supplement S7 for full CSV).
+* discourseboundary (sample): first lines map to canonical indices 0, 1, 2, 4, 5, 6, 7, 8, 9, 10.
+* srlsim (sample): includes unmapped category rows (canonical index -1) interleaved with mapped units (see Supplement S7).
+Full mapping CSVs and remapped JSONs are archived in Supplement S7 for inspection.
+
+Flip diagnostics and motif preservation (summary)
+* Flip attribution rules (anchor fragmentation, block fragmentation, singleelement relocation, displacement scaling, other/mixed) and perflip records are provided in Supplement S7.
+* Permotif preservation (qualitative): APD and BRE are the most robust motifs across plausible eventizations; FM/EM is most sensitive to splitting/merging. Exact preservation fractions and 95% bootstrap CIs are in Supplement S7.
+
+
+
+Why degenerate ARI/? values are omitted here (brief justification)
+* When a mapping assigns parse units to canonical indices in a onetoone sequence, remapped parse labels equal canonical indices and ARI/? computed on those remapped arrays are mathematically forced to 1.000. Reporting such degenerate numbers without mapping diagnostics is uninformative. Appendix H therefore omits degenerate ARI/? from the main table and instead provides the mapping quality evidence that determines whether perfect agreement is substantive (high token overlap and nearcomplete coverage) or mappingdriven.
+
+Reproducibility and file locations
+* Eventizations and mappings: supplement_s7/eventizations/, supplement_s7/mappings/
+* Remapped labels and results: supplement_s7/results/
+* Bootstrap and diagnostic outputs: supplement_s7/diagnostics_bootstrap/, supplement_s7/diagnostics/
+* Flip diagnostics and adjudication logs: supplement_s7/flip_diagnostics.csv, supplement_s7/adjudication_logs/
+Each artifact includes a provenance header (git commit, exact command, run timestamp) and checksums so readers can reproduce the runs.
+
+
+
+
+

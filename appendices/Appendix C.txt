@@ -1,0 +1,38 @@
+Appendix C — MDS and Nyström technical details
+
+Overview
+Expands the mathematical and computational description of the embedding pipeline summarized in Section 2.5 and evaluated in Section 4.1. This appendix records the linearalgebra steps, eigenpair selection rules, Nyström outofsample projection, deterministic alignment, stress diagnostics, and the targeted landmarkaugmentation loop used to produce the reported embeddings. Implementation scripts and final embedding artifacts are archived in the repository for reproducibility; specific pointers are integrated below where they are most relevant.
+
+C.1 Classical MDS and double centering
+Given an (n\times n) dissimilarity matrix (D) with entries (D_{ij}), form the squared matrix (D^{(2)}) and doublecenter it to obtain the Gram matrix: [ B = -\tfrac{1}{2},J,D^{(2)},J,\qquad J = I - \tfrac{1}{n}\mathbf{1}\mathbf{1}\top. ] Eigenpairs ((\lambda_k, v_k)) of (B) with (\lambda_k>0) yield classical MDS coordinates via (X = V\Lambda{1/2}). Numerical safeguards (symmetric enforcement, smallvalue truncation) are applied in scripts/embedding_pipeline.py to ensure numerical stability and reproducible outputs.
+
+C.2 Eigenpair selection and dimensionality choice
+Eigenpairs are retained using three joint criteria: (1) positive eigenvalues only; (2) cumulative variance threshold (default ?90% of (\mathrm{trace}(B))); and (3) meaningful stress reduction when increasing dimension. These criteria justify the 3dimensional visualization used in Section 4.1 while higher dimensions (e.g., 8D) are retained for fidelity checks and rankpreservation diagnostics. The selection logic and thresholds are implemented in the pipeline and recorded in the embedding provenance.
+
+C.3 Nyström outofsample projection (practical formula and notes)
+For a nonlandmark item (x) with squared dissimilarities (D_{xL}{(2)}) to the (m) landmarks, compute the centered vector (\tilde{D}_{xL}{(2)}) consistent with doublecentering and project into the landmark eigenspace: [ x^* = -\tfrac{1}{2},\Lambda_d^{-1/2},V_d^\top,\tilde{D}_{xL}^{(2)}, ] where (\Lambda_d) and (V_d) are the retained (d)-dimensional landmark eigenpairs. In practice we:
+* precompute centering terms from the landmark block for batch projection;
+* apply Tikhonov regularization to (\Lambda_d^{-1/2}) when small eigenvalues occur (default (\epsilon=10^{-8}));
+* verify numerical consistency by reprojecting landmarks and logging maximum coordinate deviations.
+The deterministic implementation and projection logs are in scripts/embedding_pipeline.py and outputs/embeddings/nystrom_projection_log.csv. See Supplement S1 for projection diagnostics and counterexample permutations that illustrate potential geometric artifacts.
+
+C.4 Rotational alignment and deterministic orientation
+To ensure reproducible visual alignment across runs, we apply an orthonormal Procrustes rotation that places the canonical permutation along the positive (y)axis and fixes sign indeterminacy. Rotation parameters and provenance (commit hash, run date, parameter file) are recorded with the embedding artifact so visualizations are deterministic across reproductions; the rotation step is implemented in the final refinement stage of scripts/embedding_pipeline.py.
+
+C.5 Stress definition and fidelity diagnostics
+Nonmetric SMACOF stress is reported as [ \text{Stress} = \sqrt{\frac{\sum_{i<j}\bigl(d_{ij}^{\text{MDS}}-D_{ij}\bigr)^2}{\sum_{i<j}D_{ij}^2}}, ] and we complement stress with Spearman rank correlation between original dissimilarities and embedded Euclidean distances (Section 4.1 reports Spearman (\rho) values). Shepardplot data and stress summaries used to justify the 3D visualization are archived in outputs/embeddings/shepard_plot_data.csv; these diagnostics demonstrate why the 3D view balances interpretability and fidelity for motif separation.
+
+C.6 Targeted landmark augmentation (procedure and effect)
+To reduce the heavy tail of perpoint stress produced by a fixed landmark set we run a targeted augmentation loop:
+1. compute perpoint stress after an initial landmark SMACOF;
+2. select the top (k) higheststress nonlandmarks (defaults (k=50), then (k=100));
+3. add each selected point’s (r) nearest neighbors by original (D) (default (r=20)) to the landmark set;
+4. reembed the landmark submatrix and reproject nonlandmarks;
+5. run a global SMACOF refinement.
+This augmentation improved global rank preservation from (\rho=0.8348) to (\rho=0.8432) in our runs; augmentation parameters and logs are in outputs/embeddings/augmentation_log.csv. The augmentation procedure and its effect on the heavytail of perpoint stress are discussed in Section 4.1 and illustrated in the Shepardplot diagnostics archived with the embedding outputs.
+
+C.7 Numerical safeguards, implementation notes, and provenance
+Practical safeguards include symmetric enforcement of (B), smallvalue eigen truncation, Tikhonov regularization for nearsingular landmark submatrices, and deterministic kmeans landmark selection. All random seeds, exact commands, and provenance headers (commit 7350a47, run date, parameter file) are embedded in output artifacts. Key files for reproduction: scripts/embedding_pipeline.py, outputs/embeddings/landmark_indices.csv, outputs/embeddings/embedding_coords.npy, and checksums.md5.
+
+
+ 

@@ -1,0 +1,57 @@
+Appendix F — ? Tuning and Quadratic Scaling
+
+Overview
+Documents the preregistered tuning procedure, diagnostics, and implementation choices for the (\kappa)-weighted displacement metric and the small quadratic stabilization term (\alpha). This appendix gives the metric definition, the grid search and crossvalidation protocol, bootstrap uncertainty estimates, a concise justification for the quadratic term, comparative performance against alternative metrics, and exact pointers to the scripts and artifacts needed to reproduce the tuning results. Tuning outputs and diagnostic tables are archived in the repository and in Supplement S8 (stability and grid diagnostics).
+
+F.1 Metric definition and preregistered grid
+We define the (\kappa)-weighted displacement and its optionally stabilized form as [ \mathrm{disp}{\kappa}(\pi)=\frac{1}{n}\sum{i=1}{n}\bigl,\mathrm{pos}{\pi}(i)-\mathrm{pos}{\mathrm{canon}}(i),\bigr{\kappa}, ] [ \mathrm{disp}{\kappa,\alpha}^{\mathrm{scaled}}(\pi)=\mathrm{disp}{\kappa}(\pi)\Bigl(1+\alpha\cdot\mathrm{disp}_{\kappa}(\pi)^{2}\Bigr). ] The preregistered grid explored
+* (\kappa\in[0.80,2.00]) in steps of (0.05), and
+* (\alpha\in[0.0000,0.0050]) in steps of (0.0002).
+The grid was evaluated against the directional coherence scalar (score_dir) and other fidelity diagnostics described in Appendices B and C.
+
+F.2 Crossvalidation and selection criterion
+A fivefold crossvalidation procedure measured the Pearson correlation between\[
+\mathrm{disp}_{\kappa,\alpha}^{\mathrm{scaled}}(\pi)
+\quad\text{and}\quad
+\text{score\_dir on held?out permutations.}
+\]
+
+Selection objective (prioritized):
+1. maximal absolute Pearson correlation with \(\text{score\_dir}\);
+2. monotonicity in the upper tail (reduction of collapse among extreme permutations);
+3. numerical stability (small variance across folds).
+
+Best performing region on the grid:
+\[
+\kappa \approx 1.2,\qquad \alpha \approx 1\times 10^{-4}.
+\] with mean Pearson (\approx -0.903) and crossfold SD (\approx 0.0196). These values are reported in the definitive tuning artifact outputs/tuning/kappa_grid_results.csv.
+
+F.3 Bootstrap diagnostics and uncertainty quantification
+We ran (B=1000) bootstrap resamples of the tuning procedure to estimate sampling variability of the selected parameters. Results:
+* (\kappa) clustered tightly around (1.2) with a 95% bootstrap CI (\approx [1.15,,1.30]).
+* (\alpha) concentrated near (1\times 10^{-4}); no bootstrap replicate selected (\alpha>0.001).
+* Bootstrap summaries, histograms, and the provenance header (commit, command, run date) are archived in supplement/artifacts/tuning/bootstrap_kappa_alpha/.
+These diagnostics support the stability of the chosen region and justify reporting a single default pair for downstream analyses.
+
+F.4 Rationale for the quadratic stabilization term (\alpha)
+Practical and statistical motivations for adding the small quadratic term:
+* Uppertail separation. Without (\alpha), extreme permutations with very large (\mathrm{disp}_{\kappa}) values compress into a narrow range after aggregation; the quadratic term increases dynamic range in the tail and preserves discriminability among the most distorted permutations.
+* Monotonicity and correlation. The quadratic term modestly improves monotonic alignment with score_dir in the upper tail, increasing overall correlation while avoiding overamplification of moderate displacements.
+* Numerical regularity. Small (\alpha) values (e.g., (10^{-4})) stabilize comparisons across runs and reduce sensitivity to single extreme events without materially changing interpretability for the bulk of permutations.
+We therefore adopt (\alpha=1\times 10^{-4}) as the default balance between stability and interpretability; sensitivity to (\alpha) is reported in Supplement S8.
+
+F.5 Comparative performance against alternative metrics
+Summary of representative correlations with score_dir (definitive run):
+* Pure Kendall (d_K): Pearson (\approx -0.707).
+* Kendall + linear displacement: Pearson (\approx -0.781).
+* Kendall + (\kappa)-weighted displacement: Pearson (\approx -0.892).
+* Hybrid ((\kappa)-weighted + quadratic (\alpha)): Pearson (\approx -0.903).
+The hybrid metric yields the strongest alignment with the directional coherence scalar while preserving interpretability and numerical stability.
+
+F.6 Reproducibility, crossreferences, and file pointers
+* Primary scripts: scripts/tuning/kappa_grid_search.py (grid search and crossvalidation), scripts/tuning/bootstrap_kappa_alpha.py (bootstrap diagnostics).
+* Artifacts: outputs/tuning/kappa_grid_results.csv, outputs/tuning/bootstrap_summary.csv, and supplement/artifacts/tuning/ (histograms, provenance headers).
+* Crossreferences: Appendix B (feature definitions and weight sensitivity), Appendix C (embedding diagnostics that use the tuned displacement), Appendix I (extended derivations and parameter tables), and Supplement S8 (full stability sweeps, focused threshold grids, and diagnostic matrices).
+* Provenance: each tuning artifact includes the git commit hash, exact command line, parameter JSON used, and run timestamp; the definitive run used in the manuscript is recorded in the repository manifest.
+
+

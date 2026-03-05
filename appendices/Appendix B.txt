@@ -1,0 +1,35 @@
+Appendix B — Feature Definitions, Weights, and Sensitivity Analysis
+
+Overview
+Defines the structural features that compose our coherence score, score_dir, gives the default weighting choices, and summarizes preregistered robustness checks. The appendix links conceptual definitions to the deterministic implementation and points readers to the repository artifacts needed to reproduce the sensitivity and bootstrap diagnostics.
+
+score_dir (aggregation)
+The composite directional coherence score, score_dir, aggregates the component features as a weighted linear sum:
+[ \text{score_dir}(\pi)=\sum_{f} w_f\cdot\text{feature}_f(\pi), ] where (w_f) are the default weights (see config/weights.json). score_dir is used in Section 3 to rank directional disruption and enters motif rules described in Appendix E; the exact implementation is in scripts/compute_metrics.py.
+
+Feature definitions
+* speech_gap — counts nonadjacent repeats of the same speaker; higher ? broken conversational flow.
+* scene_span — sum of perscene spans ((\max - \min)); higher ? scene fragmentation.
+* span_excess — (\sum_s \max(0,\text{span}_s - \text{canonical_span}_s)); penalizes unnecessary scattering.
+* disp_sum — (\sum_i |p_i(\pi)-p_i(\text{canon})|); coarse global scrambling measure.
+* disp_excess — (\sum_i \max(0,|p_i(\pi)-p_i(\text{canon})|-w)) with default (w=3); highlights deep relocations.
+* temporal_violations — count of pairwise inversions relative to canonical order; treated as the most severe violation.
+* ?weighted displacement — (\mathrm{disp}_\kappa=\sum_i |p_i(\pi)-p_i(\text{canon})|^\kappa) with quadratic stabilization; see Appendix F for tuning and justification.
+
+Default weights and rationale
+Default weights (stored in config/weights.json): speech_gap: 10; scene_span: 5; span_excess: 5; disp_sum: 2; disp_excess: 2; temporal_violations: 500.
+Weights reflect preregistered interpretive priorities: temporal inversions receive the largest penalty because they directly violate precedence relations; span and displacement terms encode progressively milder structural disruptions.
+
+Sensitivity and robustness
+A preregistered ±20% oneatatime perturbation of each weight recomputed score_dir across permutations. All Spearman correlations with the default ranking exceeded 0.95, indicating the composite score is not dominated by any single feature. Bootstrap resampling (N=500) produced narrow 95% confidence intervals for median feature contributions. Full sensitivity grids, bootstrap samples, and summary outputs are archived in the repository (see Reproducibility below).
+
+Worked examples (intuition)
+* Local swap — adjacent swap increases disp_sum but leaves scene_span largely unchanged.
+* Scene fragmentation — splitting an event increases scene_span and span_excess.
+* Temporal inversion — reversing an early subsequence sharply raises temporal_violations.
+* GDlike scrambling — extreme permutations show large disp_excess and many temporal violations.
+
+Reproducibility and crossreferences
+Implementation and exact files: scripts/compute_metrics.py (feature code and score_dir), config/weights.json (default weights), and sensitivity/bootstrap outputs in supplement/artifacts/stability_tests/ (e.g., stability_bootstrap_samples.csv, stability_summary.csv). For ? tuning and the quadratic stabilization term see Appendix F and its archived grid results. For motifassignment pseudocode, multilabel logic, and thresholds see Appendix E and scripts/motif_assignment.py.
+
+
