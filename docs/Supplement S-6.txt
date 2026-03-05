@@ -1,1 +1,2 @@
-This supplement has been moved. See ../supplement/Supplement S-6.txt
+This supplement has been moved to the canonical supplement directory.
+See ../supplement/Supplement S-6.txt

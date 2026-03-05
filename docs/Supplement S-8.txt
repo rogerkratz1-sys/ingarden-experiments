@@ -1,2 +1,2 @@
 This supplement has been moved to the canonical supplement directory.
-See ../supplement/Supplement S-3.txt
+See ../supplement/Supplement S-8.txt

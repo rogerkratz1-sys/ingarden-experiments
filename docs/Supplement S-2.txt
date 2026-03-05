@@ -1,7 +1,2 @@
-﻿This file has moved.
-
-The authoritative version of Supplement S-2 is now located at:
-
-supplement/S-2/Supplement S-2.txt
-
-See supplement/README_S2.txt for provenance, commands, and checksums.
+This supplement has been moved to the canonical supplement directory.
+See ../supplement/Supplement S-2.txt
