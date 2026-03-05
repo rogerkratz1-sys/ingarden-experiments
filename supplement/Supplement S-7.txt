@@ -1,0 +1,108 @@
+Supplement S7 — Eventization mappings, flip diagnostics, and reproducible artifacts
+
+Overview
+Purpose
+Provide the complete, publicationready reproducibility bundle for the eventization sensitivity analyses described in Appendix H. All files are plain UTF8 text or CSV. The supplement contains the exact parse texts used in the analyses, the canonical?parse mapping CSVs, full evaluation outputs, flip reports, multilabel flags, threshold sensitivity outputs, and the scripts needed to reproduce every diagnostic reported in the paper. No binary plots are required or included.
+
+Directory layout and authoritative files
+All paths are relative to the repository root. Filenames are exact and case sensitive.
+supplement_s7/
+  README_S7.txt
+  manifest_checksums.txt
+  eventizations/
+    canonical.txt
+    parseA.txt
+    parseB.txt
+    tokengran.txt
+    punctsplit.txt
+    discourseboundary.txt
+    srlsim.txt
+  mappings/
+    mapping_canonical_to_parseA.csv
+    mapping_canonical_to_parseB.csv
+    mapping_canonical_to_tokengran.csv
+    mapping_canonical_to_punctsplit.csv
+    mapping_canonical_to_discourseboundary.csv
+    mapping_canonical_to_srlsim.csv
+  results/
+    evaluation_results_canonical.json
+    evaluation_results_parseA.json
+    evaluation_results_parseB.json
+    evaluation_results_tokengran.json
+    evaluation_results_punctsplit.json
+    evaluation_results_discourseboundary.json
+    evaluation_results_srlsim.json
+    targeted_summary_*.json
+  flip_diagnostics/
+    flip_report_all_parses.csv
+    flip_examples_README.txt
+    flip_examples_sample.csv
+  stability/
+    threshold_sensitivity_results.csv
+    k_tuning_grid_results.csv
+  multilabel/
+    multi_label_per_permutation.csv
+    overlap_matrix.csv
+  scripts/
+    run_evaluation.py
+    compute_ari_kappa.py
+    flip_attribution.py
+    make_supplement_manifest.py
+  checksums/
+    sha256_checksums.txt
+Authoritative inputs are the files in eventizations/ and mappings/. The evaluation scripts read those files directly.
+
+Eventization text files (what they are and where to find them)
+Location: supplement_s7/eventizations/
+Format: UTF8 plain text; one parse unit per line; no markup beyond plain text.
+Files included
+* canonical.txt
+* parseA.txt
+* parseB.txt
+* tokengran.txt
+* punctsplit.txt
+* discourseboundary.txt
+* srlsim.txt
+How to use them
+1. Use the parse text file for a given parse together with the corresponding mapping CSV in supplement_s7/mappings/ to reproduce aggregation from parse units to canonical indices.
+2. Run scripts/run_evaluation.py with the --parse argument matching the parse name to reproduce the evaluation outputs for that parse. Example commands are in the Reproduction section below.
+3. When inspecting flips, open the parse text file to see the exact unitization that produced the mapping referenced in flip_report_all_parses.csv.
+
+Results formats and key files to inspect
+Evaluation outputs (results/) are JSON files with two toplevel keys: targeted and random_baseline. Each targeted entry contains the original permutation variant, raw diagnostics, boolean motif flags, aggregated canonical permutation, and aggregated diagnostics.
+Flip report (flip_diagnostics/flip_report_all_parses.csv) is a single CSV with one row per permutation that changes primary label under mapping. Columns are:
+perm_id,canonical_label,parse_label,parse_name,raw_kendall,raw_max_disp,raw_block_len,raw_block_disp,anchors_ok_canonical,anchors_ok_parse,flip_cause,explanation
+Multilabel outputs (multilabel/) list boolean motif flags for every permutation and an overlap matrix showing cooccurrence counts.
+Stability outputs (stability/) report threshold perturbation counts and kgrid results used in sensitivity checks.
+
+Reproduction quick commands
+Run these from the repository root. All scripts accept --help for full options.
+# Evaluate canonical parse and write results
+python supplement_s7/scripts/run_evaluation.py --parse canonical --outdir supplement_s7/results --M_target 200 --N_random 5000
+
+# Evaluate ParseA
+python supplement_s7/scripts/run_evaluation.py --parse parseA --outdir supplement_s7/results --M_target 200 --N_random 5000
+
+# Compute ARI and Cohen's K with bootstrap CIs
+python supplement_s7/scripts/compute_ari_kappa.py --canonical supplement_s7/results/evaluation_results_canonical.json --parse supplement_s7/results/evaluation_results_parseA.json --out supplement_s7/results/ari_parseA.csv
+
+# Produce flip attribution report across all parses
+python supplement_s7/scripts/flip_attribution.py --results-dir supplement_s7/results --mappings-dir supplement_s7/mappings --out supplement_s7/flip_diagnostics/flip_report_all_parses.csv
+
+# Regenerate manifest and checksums
+python supplement_s7/scripts/make_supplement_manifest.py --root supplement_s7 --out supplement_s7/manifest_checksums.txt
+Notes
+* Use --seed to reproduce exact targeted variants.
+* Use --workers to parallelize expensive baseline computations.
+
+Checksums, provenance, and contact
+Checksums: checksums/sha256_checksums.txt and manifest_checksums.txt list SHA256 checksums and file sizes for every file in supplement_s7/. Verify integrity after download or cloning.
+Provenance: Each evaluation_results_*.json includes the run manifest fields git_commit, thresholds_file, weights_file, and seed.
+Contact and license: Code and data in this supplement are released under the MIT License. For reproduction questions contact the corresponding author listed in the main manuscript.
+
+Short guidance for readers and reviewers
+* To inspect any flip, open the corresponding parse text file in supplement_s7/eventizations/, consult the mapping CSV in supplement_s7/mappings/, and then inspect the flip row in supplement_s7/flip_diagnostics/flip_report_all_parses.csv.
+* If you want a quick check of agreement metrics, run compute_ari_kappa.py on the canonical and one parse result JSON.
+* If you modify or add eventizations, add a new parse text file and mapping CSV, then run run_evaluation.py and update the manifest with make_supplement_manifest.py.
+
+
