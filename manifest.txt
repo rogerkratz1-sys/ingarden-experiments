@@ -1,0 +1,66 @@
+Repository Manifest
+===================
+
+This manifest provides a complete index of all long-form materials associated with the manuscript, including canonical supplements, appendices, artifact bundles, and navigation pointer files. All paths are relative to the repository root.
+
+-------------------------------------------------------------------------------
+1. Supplements (Canonical Versions)
+-------------------------------------------------------------------------------
+
+Supplement S-1: supplement/Supplement S-1.txt
+Supplement S-2: supplement/Supplement S-2.txt
+Supplement S-3: supplement/Supplement S-3.txt
+Supplement S-4: supplement/Supplement S-4.txt
+Supplement S-5: supplement/Supplement S-5.txt
+Supplement S-6: supplement/Supplement S-6.txt
+Supplement S-7: supplement/Supplement S-7.txt
+Supplement S-8: supplement/Supplement S-8.txt
+
+-------------------------------------------------------------------------------
+2. Supplement Artifact Bundles
+-------------------------------------------------------------------------------
+
+S-7 Artifact Bundle: supplement/S-7/
+    - README: supplement/S-7/README_S7.txt
+    - Diagnostics, mappings, eventizations, results, checksums
+
+S-8 Artifact Bundle: supplement/S-8/
+    - README: supplement/S-8/S8_readme.txt
+    - Stability maps, diagnostics, null summaries, configuration files
+
+-------------------------------------------------------------------------------
+3. Supplement Pointer Files (Navigation Layer)
+-------------------------------------------------------------------------------
+
+docs/Supplement S-1.txt  ? points to supplement/Supplement S-1.txt
+docs/Supplement S-2.txt  ? points to supplement/Supplement S-2.txt
+docs/Supplement S-3.txt  ? points to supplement/Supplement S-3.txt
+docs/Supplement S-4.txt  ? points to supplement/Supplement S-4.txt
+docs/Supplement S-5.txt  ? points to supplement/Supplement S-5.txt
+docs/Supplement S-6.txt  ? points to supplement/Supplement S-6.txt
+docs/Supplement S-7.txt  ? points to supplement/Supplement S-7.txt
+docs/Supplement S-8.txt  ? points to supplement/Supplement S-8.txt
+
+-------------------------------------------------------------------------------
+4. Appendices (Canonical Versions)
+-------------------------------------------------------------------------------
+
+Appendix A: appendices/Appendix A.txt
+Appendix B: appendices/Appendix B.txt
+Appendix C: appendices/Appendix C.txt
+Appendix D: appendices/Appendix D.txt
+Appendix E: appendices/Appendix E.txt
+Appendix F: appendices/Appendix F.txt
+Appendix G: appendices/Appendix G.txt
+Appendix H: appendices/Appendix H.txt
+Appendix I: appendices/Appendix I.txt
+
+-------------------------------------------------------------------------------
+5. Notes on Repository Structure
+-------------------------------------------------------------------------------
+
+- All canonical supplement texts reside exclusively in the supplement/ directory.
+- All appendices reside exclusively in the appendices/ directory.
+- The docs/ directory contains only lightweight pointer files for Supplements S-1 through S-8.
+- Artifact bundles for S-7 and S-8 contain reproducibility materials, diagnostics, mappings, and results.
+- No long-form materials should be stored directly in docs/ or the repository root.
