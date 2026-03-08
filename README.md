@@ -1,23 +1,26 @@
 # Ingarden Experiments
 
-This repository contains the experimental pipelines, diagnostics, and reproducibility materials associated with the *Ingarden Project*.  
-It complements the main repository (`ingarden-project`) by housing exploratory analyses, prototype scripts, and experiment‑specific outputs that are **not** part of the archival supplement bundles.
+This repository is the primary home for all code, data, analyses, and reproducibility materials associated with the *Ingarden Project*.  
+It replaces earlier attempts to host the project in other repositories and is intended to serve as the clean, authoritative, and fully auditable version of the work.
 
 ---
 
-## Repository Purpose
+## Purpose
 
-The goal of this repository is to provide a clean, auditable workspace for:
+This repository consolidates:
 
-- Experimental pipelines under development  
-- Diagnostics and exploratory analyses  
-- Prototype scripts and intermediate outputs  
-- Reproducibility notes and provenance tracking for experiments that inform, but are not included in, the final supplement
+- Core scripts and analysis pipelines  
+- Experimental workflows and diagnostics  
+- Reproducibility materials and supplement bundles  
+- Provenance notes and configuration files  
+- All artifacts required for archival release (e.g., Zenodo)
 
-This separation keeps the main project repository focused, stable, and publication‑ready while allowing flexible experimentation here.
+The goal is to maintain a single, coherent, reviewer‑friendly repository without legacy clutter or integration issues.
 
 ---
 
 ## Structure
 
-The repository is organized to maximize clarity and reproducibility:
+A typical layout for this repository is:
+
+
