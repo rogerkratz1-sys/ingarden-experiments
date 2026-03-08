@@ -1,7 +1,25 @@
-.venv/
-.venv/
-venv/
-env/
-.env
+# Python cache
 __pycache__/
-.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+.env/
+
+# Temporary files
+*.tmp
+*.log
+
+# Large generated artifacts (keep repo clean)
+outputs/**/*.png
+outputs/**/*.pdf
+outputs/**/*.svg
