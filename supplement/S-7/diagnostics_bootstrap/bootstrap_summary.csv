@@ -1,13 +1,3 @@
-parse,threshold_pct,n_pairs,ari_point,ari_ci_lo,ari_ci_hi,k_point,k_ci_lo,k_ci_hi
-tokengran,5,14,1.0,1.0,1.0,1.0,1.0,1.0
-tokengran,15,14,1.0,1.0,1.0,1.0,1.0,1.0
-tokengran,25,14,1.0,1.0,1.0,1.0,1.0,1.0
-punctsplit,5,24,1.0,1.0,1.0,1.0,1.0,1.0
-punctsplit,15,24,1.0,1.0,1.0,1.0,1.0,1.0
-punctsplit,25,22,1.0,1.0,1.0,1.0,1.0,1.0
-discourseboundary,5,10,1.0,1.0,1.0,1.0,1.0,1.0
-discourseboundary,15,10,1.0,1.0,1.0,1.0,1.0,1.0
-discourseboundary,25,10,1.0,1.0,1.0,1.0,1.0,1.0
-srlsim,5,17,1.0,1.0,1.0,1.0,1.0,1.0
-srlsim,15,16,1.0,1.0,1.0,1.0,1.0,1.0
-srlsim,25,15,1.0,1.0,1.0,1.0,1.0,1.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:a567fbb6156e24f9efb5a9fd25efbe3b66c2dd9fdff789a9faa8e2a9b75f027b
+size 589

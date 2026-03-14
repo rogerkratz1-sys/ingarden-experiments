@@ -1,7 +1,3 @@
-consensus_id,n_member_clusters,fragmentation,mean_pairwise_jaccard,n_consensus_perms
-0,50,50,1,4
-1,50,50,1,2
-2,50,50,1,8
-3,50,50,1,2
-4,50,50,1,2
-5,50,50,1,2
+version https://git-lfs.github.com/spec/v1
+oid sha256:fc570df4394681d881b380e3cf9e8199442ab68fb4a841612da8e147d279a8f2
+size 164

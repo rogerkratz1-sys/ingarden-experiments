@@ -1,7 +1,3 @@
-orig_motif,AnchorPreservingDisorder,BlockReorderExtreme,FrontEndMove,GlobalDistortion
-APD,0,26,5,69
-BRE,1,8,4,87
-DCO,0,0,0,100
-FMEM,9,8,3,0
-GD,0,2,0,98
-Other,0,5,3,92
+version https://git-lfs.github.com/spec/v1
+oid sha256:5025fac4a800ab038ba24d0360fe2706bc5be93a2fe8f5e1a160dc8438b4c9d4
+size 174

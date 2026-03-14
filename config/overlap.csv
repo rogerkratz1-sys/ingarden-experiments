@@ -1,4 +1,3 @@
-﻿metric,tautology_flag,notes
-T_obs,No,Test metric for sensitivity analysis
-n_points,No,Number of points in cluster
-A_k,No,Estimated cluster area
+version https://git-lfs.github.com/spec/v1
+oid sha256:84e92b20cc07ce9a3ab43fb4d7735db9b473ee24d87d84670836b22d854f8b68
+size 148

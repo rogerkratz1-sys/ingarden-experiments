@@ -1,24 +1,3 @@
-parse_unit_id,best_canonical_index,best_jaccard
-﻿# Agents and their actions,6,0.181818
-Ten maidens took their lamps.,0,0.454545
-(Agent action) They went to meet the bridegroom.,0,0.357143
-# Classification / state,-1,0.000000
-Five of them were foolish.,1,0.714286
-Five of them were wise.,1,0.714286
-# Possessions and contrasts,1,0.111111
-The foolish took their lamps but took no oil with them.,2,0.692308
-The wise took flasks of oil with their lamps.,3,0.900000
-# Temporal / event,-1,0.000000
-"As the bridegroom was delayed, they all slumbered and slept.",4,1.000000
-"At midnight there was a cry: “Behold, the bridegroom! Come out to meet him.”",5,0.933333
-# Reaction / preparation,-1,0.000000
-Then all those maidens rose and trimmed their lamps.,6,1.000000
-# Request / speech acts,-1,0.000000
-"The foolish said to the wise, “Give us some of your oil, for our lamps are going out.”",7,0.944444
-"The wise replied, “Perhaps there will not be enough for us and for you; go rather to the dealers and buy for yourselves.”",8,0.950000
-# Outcome / result,-1,0.000000
-"And while they went to buy, the bridegroom came.",9,0.428571
-"Those who were ready went in with him to the marriage feast, and the door was shut.",9,0.761905
-# Aftermath / plea,-1,0.000000
-"Afterward the other maidens came also, saying, “Lord, lord, open to us.”",10,1.000000
-"But he replied, ""Truly, I say to you, I do not know you.”",11,1.000000
+version https://git-lfs.github.com/spec/v1
+oid sha256:4f60f05044a8e792fa35c2dd561dfe31484b27fcbe408547f838642609c8e427
+size 1453

@@ -1,11 +1,3 @@
-parse_unit_id,best_canonical_index,best_jaccard
-﻿Narrative setup: Ten maidens took their lamps and went to meet the bridegroom.,0,0.846154
-"Contrast statement: Five of them were foolish, and five were wise.",1,0.777778
-"Possession contrast: For when the foolish took their lamps, they took no oil with them; but the wise took flasks of oil with their lamps.",2,0.666667
-"Delay and sleep: As the bridegroom was delayed, they all slumbered and slept.",4,0.833333
-"Alarm event: But at midnight there was a cry: “Behold, the bridegroom! Come out to meet him.”",5,0.882353
-Preparation reaction: Then all those maidens rose and trimmed their lamps.,6,0.818182
-"Request and plea: And the foolish said to the wise, “Give us some of your oil, for our lamps are going out.”",7,0.900000
-"Refusal and advice: But the wise replied, “Perhaps there will not be enough for us and for you; go rather to the dealers and buy for yourselves.”",8,0.909091
-"Outcome and exclusion: And while they went to buy, the bridegroom came, and those who were ready went in with him to the marriage feast, and the door was shut.",9,0.913043
-"Aftermath and denial: Afterward the other maidens came also, saying, “Lord, lord, open to us.” But he replied, ""Truly, I say to you, I do not know you.”",10,0.458333
+version https://git-lfs.github.com/spec/v1
+oid sha256:2b9cefdfbaf2bd95ff71368e5c6c065283546650edd3bcf7ed87bf15e5502fbf
+size 1307

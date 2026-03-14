@@ -1,5 +1,3 @@
-baseline_first_label,total_rows,unstable_count,fraction_unstable
-AnchorPreservingDisorder,10,0,0.0
-BlockReorderExtreme,49,0,0.0
-FrontEndMove,15,0,0.0
-GlobalDistortion,446,0,0.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:1896dd1ffb1b6d7aded07cd0a85dd163ba42aae7334c153ea473d5808319bbdb
+size 182
