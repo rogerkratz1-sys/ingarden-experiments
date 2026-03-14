@@ -1,0 +1,15 @@
+ingarden v1.1.4
+
+This release bundles the ingarden code, documentation, and the primary stability dataset used in the paper.
+
+Included artifacts:
+- ingarden-v1.1.4_full.zip — full data + source archive (includes Data/stability_map.csv).
+- ingarden-v1.1.4_no-data.zip — source-only archive (excludes Data/stability_map.csv).
+
+Checksums:
+- Full ZIP SHA256: F7920B5E662A9FF9BECC42F2D09E9A4CE1028DA736AF9A9358D40AB7C041E258
+- No-data ZIP SHA256: 8E4A4467E40D0F647F0D43ED73DBC7A5851E7B294349C1C622CBD853C90FD07F
+
+Notes:
+Data/stability_map.csv (≈236 MB) is tracked with Git LFS and included in the full release asset.
+See CITATION.cff for citation metadata and MANIFEST.csv for a compact file listing.
